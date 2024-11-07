@@ -1,4 +1,3 @@
-// index.js
 const express = require('express');
 const app = express();
 const cors = require('cors');
@@ -31,8 +30,14 @@ connectDB(process.env.MONGO_URL)
         console.log('Database connected');
     })
     .catch((error) => {
-        console.log(error);
+        console.log("Database connection error:", error);
+        process.exit(1); // Optional: exit if DB connection fails
     });
+
+// 404 Route Handler
+app.use((req, res) => {
+    res.status(404).send('Page not found');
+});
 
 // Export app for Vercel
 module.exports = app;
