@@ -20,6 +20,11 @@ app.use('/api', candidateRoutes);
 app.use('/api', voterRoutes);
 app.use('/images', express.static(path.join(__dirname, 'votingSystem')));
 
+// Root route to avoid 404 on base URL
+app.get('/', (req, res) => {
+    res.send('Welcome to the Voting App API');
+});
+
 // Database Connection
 connectDB(process.env.MONGO_URL)
     .then(() => {
