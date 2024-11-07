@@ -2,12 +2,15 @@
 {
   "version": 2,
   "builds": [
-    {
-      "src": "index.js",
-      "use": "@vercel/node"
-    }
+    { "src": "index.js", "use": "@vercel/node" }
   ],
   "routes": [
-    { "src": "/api/(.*)", "dest": "index.js" }
+    { "src": "/api/(.*)", "dest": "index.js" },
+    {
+      "src": "/(.*)",
+      "headers": {
+        "Content-Security-Policy": "default-src 'self'; font-src 'self' https://vote-app-beige.vercel.app; script-src 'self' https://vercel.live; style-src 'self' 'unsafe-inline';"
+      }
+    }
   ]
 }
